@@ -12,7 +12,7 @@ script:
       DOTENV_ENVIRONMENT: $DOTENV_ENVIRONMENT
       DOTENV_API_URL: $DOTENV_API_URL
       DOTENV_API_TOKEN: $DOTENV_API_TOKEN
-      DOTENV_TYPE: "env" # Type of output, e.g. "env" or "js"
+      DOTENV_TYPE: "env" # Optional: type of output, e.g. "env" (default) or "js"
       DOTENV_FILE_SOURCE: ".env.example"
       DOTENV_FILE_TARGET: ".env"
       EXTRAS_BITBUCKET_COMMIT: $BITBUCKET_COMMIT
