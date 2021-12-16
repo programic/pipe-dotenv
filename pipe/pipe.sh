@@ -71,7 +71,7 @@ replace() {
       value=$(echo "${value}" | sed -e "s/'/\\'/g")
 
       if grep -q "$1:.*$" ${DOTENV_FILE_TARGET}; then
-        sed -i -e "s/$1:.*/$1: '${value}'/" ${DOTENV_FILE_TARGET}
+        sed -i -e "s/$1:.*/$1: '${value}',/" ${DOTENV_FILE_TARGET}
         success "$1"
       else
         error "$1 not found in ${DOTENV_FILE_SOURCE}"
