@@ -63,15 +63,35 @@ dotenv() {
 replace() {
   # Escape value for sed pattern
   value=$(echo "$2" | sed -e 's/[\/&]/\\&/g')
-  # Escape quotes in value
-  value=$(echo "${value}" | sed -e 's/"/\\"/g')
 
-  if grep -q "^$1=.*$" ${DOTENV_FILE_TARGET}; then
-    sed -i -e "s/^$1=.*/$1=\"${value}\"/" ${DOTENV_FILE_TARGET}
-    success "$1"
-  else
-    error "$1 not found in ${DOTENV_FILE_SOURCE}"
-  fi
+  case ${DOTENV_TYPE} in
+    js)
+
+      # Escape single quotes in value because we use KEY: 'VALUE',
+      value=$(echo "${value}" | sed -e "s/'/\\'/g")
+
+      if grep -q "$1:.*$" ${DOTENV_FILE_TARGET}; then
+        sed -i -e "s/$1:.*/$1: '${value}'/" ${DOTENV_FILE_TARGET}
+        success "$1"
+      else
+        error "$1 not found in ${DOTENV_FILE_SOURCE}"
+      fi
+
+      ;;
+    *)
+
+      # Escape double quotes in value because we use KEY="VALUE"
+      value=$(echo "${value}" | sed -e 's/"/\\"/g')
+
+      if grep -q "^$1=.*$" ${DOTENV_FILE_TARGET}; then
+        sed -i -e "s/^$1=.*/$1=\"${value}\"/" ${DOTENV_FILE_TARGET}
+        success "$1"
+      else
+        error "$1 not found in ${DOTENV_FILE_SOURCE}"
+      fi
+
+      ;;
+  esac
 }
 
 dotenv

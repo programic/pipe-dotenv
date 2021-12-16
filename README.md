@@ -12,6 +12,7 @@ script:
       DOTENV_ENVIRONMENT: $DOTENV_ENVIRONMENT
       DOTENV_API_URL: $DOTENV_API_URL
       DOTENV_API_TOKEN: $DOTENV_API_TOKEN
+      DOTENV_TYPE: "env" # Type of output, e.g. "env" or "js"
       DOTENV_FILE_SOURCE: ".env.example"
       DOTENV_FILE_TARGET: ".env"
       EXTRAS_BITBUCKET_COMMIT: $BITBUCKET_COMMIT
@@ -19,9 +20,10 @@ script:
       EXTRAS_BITBUCKET_DEPLOYMENT_ENVIRONMENT: $BITBUCKET_DEPLOYMENT_ENVIRONMENT
 ```
 
-# Example .env.example
-Below is an example of what an .env.example can look like.
+# Example source file
+Below is an example of what an source file can look like.
 
+## .env.example
 ```dotenv
 APP_NAME="My Project"
 APP_ENV=local
@@ -36,4 +38,13 @@ BITBUCKET_DEPLOYMENT_ENVIRONMENT=
 SENTRY_LARAVEL_DSN=
 SENTRY_ENVIRONMENT="${BITBUCKET_DEPLOYMENT_ENVIRONMENT}"
 SENTRY_RELEASE="${BITBUCKET_COMMIT}"
+```
+
+## env.js
+```js
+module.exports = {
+  NODE_ENV: 'local',
+  API_URL: 'https://my-project.test',
+  SENTRY_DSN: ''
+}
 ```
