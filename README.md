@@ -43,8 +43,8 @@ SENTRY_RELEASE="${BITBUCKET_COMMIT}"
 ## env.example.js
 ```js
 module.exports = {
-  NODE_ENV: 'local',
-  API_URL: 'https://my-project.test',
+  NODE_ENV: '"local"',
+  API_URL: '"https://my-project.test"',
   SENTRY_DSN: ''
 }
 ```
