@@ -14,6 +14,9 @@ source "$(dirname "${0}")/common.sh"
 : ${DOTENV_FILE_SOURCE?"You need to set the DOTENV_FILE_SOURCE environment variable."}
 : ${DOTENV_FILE_TARGET?"You need to set the DOTENV_FILE_TARGET environment variable."}
 
+# Set default values
+: ${DOTENV_TYPE:=env}
+
 dotenv() {
   if [[ ! -f ${DOTENV_FILE_SOURCE} ]]; then
     fail "Unable to find ${DOTENV_FILE_SOURCE}"
@@ -78,7 +81,7 @@ replace() {
       fi
 
       ;;
-    *)
+    env)
 
       # Escape double quotes in value because we use KEY="VALUE"
       value=$(echo "${value}" | sed -e 's/"/\\"/g')
