@@ -40,7 +40,7 @@ SENTRY_ENVIRONMENT="${BITBUCKET_DEPLOYMENT_ENVIRONMENT}"
 SENTRY_RELEASE="${BITBUCKET_COMMIT}"
 ```
 
-## env.js
+## env.example.js
 ```js
 module.exports = {
   NODE_ENV: 'local',
